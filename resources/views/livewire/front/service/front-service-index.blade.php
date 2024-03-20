@@ -15,7 +15,7 @@
             <x-starterkid-frontend::card-grid>
             
             @foreach($services as $service)
-           <x-starterkid-frontend::post-card :model="$service" name="{{$service->name}}" linkRoute="{{route('front.service.show',$service->slug)}}" linkTitle="{{$service->name}}" buttonText="{{__('More info')}}" description="{!!$service->preview!!}" />
+           <x-starterkid-frontend::service-card name="{{$service->name}}" imgAlt="{{$service->name}}" linkRoute="{{route('front.service.show',$service->slug)}}" linkTitle="{{$service->name}}" buttonText="{{__('More info')}}" description="{!!$service->preview!!}" />
             @endforeach
 
             
