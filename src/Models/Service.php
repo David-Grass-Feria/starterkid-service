@@ -101,12 +101,12 @@ class Service extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $this->addMediaConversion(config('starterkid.spatie_conversions.small.name'))
-              ->width(config('starterkid.spatie_conversions.small.size'));
-        $this->addMediaConversion(config('starterkid.spatie_conversions.large.name'))
-              ->width(config('starterkid.spatie_conversions.large.size'));
-        $this->addMediaConversion(config('starterkid.spatie_conversions.medium.name'))
-              ->width(config('starterkid.spatie_conversions.medium.size'));
+        $this->addMediaConversion('thumb')
+              ->width(200);
+        $this->addMediaConversion('medium')
+              ->width(800);
+        $this->addMediaConversion('large')
+              ->width(1200);
               
     }
 }
