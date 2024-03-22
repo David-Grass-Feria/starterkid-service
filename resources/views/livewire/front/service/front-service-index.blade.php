@@ -11,7 +11,7 @@
     <x-starterkid-frontend::wrapper>
    
         
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 mt-5">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 mt-5">
             @foreach($services as $service)
             <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 hover:bg-primary">
               <div class="flex-shrink-0">
