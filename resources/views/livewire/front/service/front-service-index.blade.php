@@ -10,17 +10,26 @@
       
     <x-starterkid-frontend::wrapper>
    
-  
-     
-            <x-starterkid-frontend::card-grid>
-            
+        
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 mt-5">
             @foreach($services as $service)
-           <x-starterkid-frontend::service-card name="{{$service->name}}" imgAlt="{{$service->name}}" linkRoute="{{route('front.service.show',$service->slug)}}" linkTitle="{{$service->name}}" buttonText="{{__('More info')}}" description="{!!$service->preview!!}" />
-            @endforeach
-
-            
-        </x-starterkid-frontend::card-grid>
-    
+            <div class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 hover:bg-primary">
+              <div class="flex-shrink-0">
+                <img class="h-10 w-10 rounded-3xl object-contain" src="{{Cache::has('logo') ? Cache::get('logo') : asset('/logo.png')}}" alt="{{$service->name}}">
+              </div>
+              <div class="min-w-0 flex-1 text-font_primary hover:text-white">
+                <a href="{{route('front.service.show',$service->slug)}}" title="{{$service->name}}" class="focus:outline-none">
+                  <span class="absolute inset-0" aria-hidden="true"></span>
+                  <p class="text-lg font-bold">{{$service->name}}</p>
+                  <p class="truncate text-xs">{!!Str::limit($service->preview,200)!!}</p>
+                </a>
+              </div>
+            </div>
+          @endforeach 
+         
+          </div>
+          
+ 
       
     </x-starterkid-frontend::wrapper>
  
