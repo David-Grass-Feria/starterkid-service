@@ -6,7 +6,7 @@
     
 
 <x-starterkid-frontend::card>
-    <x-starterkid-frontend::card-header heading="{{config('starterkid-service.service_title')}}" />
+    <x-starterkid-frontend::card-header heading="{{config('starterkid-service.service_title')}}" description="{{config('starterkid-service.service_description')}}" />
       
     <x-starterkid-frontend::wrapper>
    
