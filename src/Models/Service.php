@@ -22,7 +22,7 @@ class Service extends Model implements HasMedia
         'title',
         'preview',
         'content',
-        'published',
+        'created_at',
         'status',
         'slug'
     ];
@@ -30,7 +30,7 @@ class Service extends Model implements HasMedia
 
     protected $casts = [
 
-        'published' => 'datetime',
+      
         'status' => 'boolean',
 
     ];
@@ -52,7 +52,7 @@ class Service extends Model implements HasMedia
 
     public function getPublished()
     {
-        return $this->published->format(config('starterkid.time_format.date_time_format'));
+        return $this->created_at->format(config('starterkid.time_format.date_time_format'));
     }
 
     //public function getTime()
@@ -81,7 +81,7 @@ class Service extends Model implements HasMedia
     }
 
     
-    public function scopeFrontGetServicesWhereStatusIsOnline(\Illuminate\Database\Eloquent\Builder $query, $search = '', $orderBy = 'published', $sort = 'desc'): \Illuminate\Database\Eloquent\Builder
+    public function scopeFrontGetServicesWhereStatusIsOnline(\Illuminate\Database\Eloquent\Builder $query, $search = '', $orderBy = 'created_at', $sort = 'desc'): \Illuminate\Database\Eloquent\Builder
     {
         $query = $query->select('id', 'name', 'title', 'published', 'status', 'slug', 'preview')
             ->where('status', true);
@@ -94,7 +94,7 @@ class Service extends Model implements HasMedia
             });
         }
 
-        $query->orderBy('published', 'desc');
+        $query->orderBy($orderBy, $sort);
 
         return $query;
     }

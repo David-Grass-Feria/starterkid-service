@@ -15,7 +15,7 @@ class ServiceCreate extends Component
     public $name;
     public $title;
     public $content;
-    public $published;
+    public $created_at;
     public $status = false;
     public $slug;
     public $preview;
@@ -29,7 +29,7 @@ class ServiceCreate extends Component
         
         $this->authorize('create',\GrassFeria\StarterkidService\Models\Service::class);
         //$this->date                                 = now()->format(config('starterkid.time_format.date_format_for_picker'));
-        $this->published                              = now()->format(config('starterkid.time_format.date_time_format_for_picker'));
+        $this->created_at                              = now()->format(config('starterkid.time_format.date_time_format_for_picker'));
         //$this->time                                 = now()->format(config('starterkid.time_format.time_format_for_picker'));
         
     }
@@ -50,7 +50,7 @@ class ServiceCreate extends Component
             'title'                     => 'required|string',
             'content'                   => 'required|string',
             'preview'                   => 'nullable|string',
-            'published'                 => 'required|date_format:' . config('starterkid.time_format.date_time_format_for_picker'),
+            'created_at'                 => 'required|date_format:' . config('starterkid.time_format.date_time_format_for_picker'),
             'status'                    => 'required|boolean',
             //'color'                     => 'required|string',
             //'range'                     => 'required|string',

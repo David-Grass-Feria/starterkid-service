@@ -40,7 +40,7 @@ class ServiceIndex extends Component
 
       
         $services = \GrassFeria\StarterkidService\Models\Service::query()
-        ->select('id','user_id','name','published','status','slug')
+        ->select('id','user_id','name','created_at','status','slug')
         ->where('id','like','%'.$this->search.'%')
         ->orWhere('name','like','%'.$this->search.'%')
         ->orderBy($this->orderBy, $this->sort)
