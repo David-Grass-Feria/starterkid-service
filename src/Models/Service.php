@@ -81,7 +81,7 @@ class Service extends Model implements HasMedia
     }
 
     
-    public function scopeFrontGetServicesWhereStatusIsOnline(\Illuminate\Database\Eloquent\Builder $query, $search = '', $orderBy = 'published', $sort = 'desc'): \Illuminate\Database\Eloquent\Builder
+    public function scopeFrontGetServicesWhereStatusIsOnline(\Illuminate\Database\Eloquent\Builder $query, $search = '', $orderBy = 'published', $sort = 'asc'): \Illuminate\Database\Eloquent\Builder
     {
         $query = $query->select('id', 'name', 'title', 'published', 'status', 'slug', 'preview')
             ->where('status', true);
