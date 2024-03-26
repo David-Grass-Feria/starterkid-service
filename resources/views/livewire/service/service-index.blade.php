@@ -50,7 +50,7 @@
                 <x-starterkid::starterkid.td>{{$service->getPublished()}}</x-starterkid::starterkid.td>
                 <x-starterkid::starterkid.td>
                     @if($service->status === true)
-                    <a target="_blank" href="{{route('front.service.show',$service->slug)}}" title="{{__('View')}}">
+                    <a target="_blank" href="{{route('front.service.show',$service->slug)}}" title="{{$service->name}}">
                         <x-starterkid::starterkid.button-secondary type="button">{{__('View')}}</x-starterkid::starterkid.button-secondary>
                     </a>
                     @endif
