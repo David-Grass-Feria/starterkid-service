@@ -73,10 +73,10 @@ class Service extends Model implements HasMedia
         parent::boot();
 
         static::updated(function ($model) {
-           \Spatie\ResponseCache\Facades\ResponseCache::forget(url('/').'/'.config('starterkid-service.service_slug').'/'.$model->slug);
+            //
         });
         static::deleted(function ($model) {
-            \Spatie\ResponseCache\Facades\ResponseCache::forget(url('/').'/'.config('starterkid-service.service_slug').'/'.$model->slug);
+            //
          });
     }
 
