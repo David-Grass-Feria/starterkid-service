@@ -5,6 +5,7 @@ namespace GrassFeria\StarterkidService\Models;
 use App\Models\User;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -72,11 +73,16 @@ class Service extends Model implements HasMedia
     {
         parent::boot();
 
+        static::created(function () {
+          Artisan::call('cache:clear');
+            
+        });
+
         static::updated(function ($model) {
-            //
+            Artisan::call('cache:clear');
         });
         static::deleted(function ($model) {
-            //
+         Artisan::call('cache:clear');
          });
     }
 
