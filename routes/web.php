@@ -26,7 +26,7 @@ Route::middleware(['web'])->group(function () {
    
     
     Route::get(config('starterkid-service.service_slug'),FrontServiceIndex::class)->name('front.service.index')->middleware('minify');
-    Route::get(config('starterkid-service.service_slug').'/{slug}',FrontServiceShow::class)->name('front.service.show')->middleware('minify','cache');
+    Route::get(config('starterkid-service.service_slug').'/{slug}',FrontServiceShow::class)->name('front.service.show')->middleware('cache','minify');
     
    
    
