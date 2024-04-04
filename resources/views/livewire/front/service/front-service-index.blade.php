@@ -13,7 +13,7 @@
         
     <x-starterkid-frontend::card-grid>
             @foreach($services as $service)
-            <x-starterkid-frontend::card-grid-service-item 
+            <x-starterkid-frontend::card-grid-service-item wire:navigate
             imgSrc="{{Cache::has('logo') ? Cache::get('logo') : asset('/logo.png')}}"
             imgAlt="{{$service->name}}"
             href="{{route('front.service.show',$service->slug)}}"
