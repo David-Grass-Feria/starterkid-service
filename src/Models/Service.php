@@ -105,6 +105,8 @@ class Service extends Model implements HasMedia
         return $query;
     }
 
+
+    
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')

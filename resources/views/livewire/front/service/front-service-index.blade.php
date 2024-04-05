@@ -9,7 +9,7 @@
     <x-starterkid-frontend::card-header heading="{{config('starterkid-service.service_title')}}" description="{{config('starterkid-service.service_description')}}" />
       
     <x-starterkid-frontend::wrapper>
-   
+      
         
     <x-starterkid-frontend::card-grid>
             @foreach($services as $service)
