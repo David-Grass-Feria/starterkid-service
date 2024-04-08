@@ -75,6 +75,7 @@ class Service extends Model implements HasMedia
 
         static::created(function () {
           Artisan::call('cache:clear');
+          \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
             
         });
 
@@ -84,6 +85,7 @@ class Service extends Model implements HasMedia
         });
         static::deleted(function ($model) {
          Artisan::call('cache:clear');
+         \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
          });
     }
 
