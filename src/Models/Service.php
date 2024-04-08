@@ -80,11 +80,14 @@ class Service extends Model implements HasMedia
 
         static::updated(function ($model) {
             Artisan::call('cache:clear');
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
         });
         static::deleted(function ($model) {
          Artisan::call('cache:clear');
          });
     }
+
+ 
 
     
     public function scopeFrontGetServicesWhereStatusIsOnline(\Illuminate\Database\Eloquent\Builder $query, $search = '', $orderBy = 'created_at', $sort = 'desc'): \Illuminate\Database\Eloquent\Builder
