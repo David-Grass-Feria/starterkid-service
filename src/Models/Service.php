@@ -31,7 +31,7 @@ class Service extends Model implements HasMedia
 
     protected $casts = [
 
-      
+
         'status' => 'boolean',
 
     ];
@@ -74,24 +74,99 @@ class Service extends Model implements HasMedia
         parent::boot();
 
         static::created(function () {
-          Artisan::call('cache:clear');
-          \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
-            
+
+            //delete all blogpost cache keys
+            $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
+            foreach ($blogposts as $blogpost) {
+                $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
+                $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+                \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+            }
+
+            //delete all services cache keys
+            $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
+            foreach ($services as $service) {
+                $url = route('front.service.show', ['slug' => $service->slug]);
+                $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+                \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+            }
+
+
+            // delete homepage cache key
+            $cacheKeyHomepage = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.homepage'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyHomepage);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.homepage'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
+            // delete more cache keys service
+            (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
         });
 
         static::updated(function ($model) {
-            Artisan::call('cache:clear');
+            //delete all blogpost cache keys
+            $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
+            foreach ($blogposts as $blogpost) {
+                $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
+                $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+                \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+            }
+
+            //delete all services cache keys
+            $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
+            foreach ($services as $service) {
+                $url = route('front.service.show', ['slug' => $service->slug]);
+                $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+                \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+            }
+
+
+            // delete homepage cache key
+            $cacheKeyHomepage = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.homepage'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyHomepage);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.homepage'));
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
+            // delete more cache keys service
+            (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
         });
         static::deleted(function ($model) {
-         Artisan::call('cache:clear');
-         \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
-         });
+            //delete all blogpost cache keys
+            $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
+            foreach ($blogposts as $blogpost) {
+                $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
+                $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+                \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+            }
+
+            //delete all services cache keys
+            $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
+            foreach ($services as $service) {
+                $url = route('front.service.show', ['slug' => $service->slug]);
+                $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+                \Illuminate\Support\Facades\Cache::forget($cacheKey);
+                \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+            }
+
+
+            // delete homepage cache key
+            $cacheKeyHomepage = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.homepage'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyHomepage);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.homepage'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
+            // delete more cache keys service
+            (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
+        });
     }
 
- 
 
-    
+
+
     public function scopeFrontGetServicesWhereStatusIsOnline(\Illuminate\Database\Eloquent\Builder $query, $search = '', $orderBy = 'created_at', $sort = 'desc'): \Illuminate\Database\Eloquent\Builder
     {
         $query = $query->select('id', 'name', 'title', 'created_at', 'status', 'slug', 'preview')
@@ -111,26 +186,23 @@ class Service extends Model implements HasMedia
     }
 
 
-    
+
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-              ->width(config('starterkid.image_conversions.thumb.width'))
-              ->sharpen(config('starterkid.image_conversions.thumb.sharpen'))
-              ->quality(config('starterkid.image_conversions.thumb.quality'))
-              ->format('webp');
+            ->width(config('starterkid.image_conversions.thumb.width'))
+            ->sharpen(config('starterkid.image_conversions.thumb.sharpen'))
+            ->quality(config('starterkid.image_conversions.thumb.quality'))
+            ->format('webp');
         $this->addMediaConversion('medium')
-              ->width(config('starterkid.image_conversions.medium.width'))
-              ->sharpen(config('starterkid.image_conversions.medium.sharpen'))
-              ->quality(config('starterkid.image_conversions.medium.quality'))
-              ->format('webp');
-       $this->addMediaConversion('large')
-              ->width(config('starterkid.image_conversions.large.width'))
-              ->sharpen(config('starterkid.image_conversions.large.sharpen'))
-              ->quality(config('starterkid.image_conversions.large.quality'))
-              ->format('webp');
-              
-        
-              
+            ->width(config('starterkid.image_conversions.medium.width'))
+            ->sharpen(config('starterkid.image_conversions.medium.sharpen'))
+            ->quality(config('starterkid.image_conversions.medium.quality'))
+            ->format('webp');
+        $this->addMediaConversion('large')
+            ->width(config('starterkid.image_conversions.large.width'))
+            ->sharpen(config('starterkid.image_conversions.large.sharpen'))
+            ->quality(config('starterkid.image_conversions.large.quality'))
+            ->format('webp');
     }
 }
