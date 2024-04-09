@@ -84,6 +84,18 @@ class Service extends Model implements HasMedia
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
 
+            // delete blopost index cache key
+            $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
+            // delete service index cache key
+            $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.service.index'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
             //delete all services cache keys
             $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
             foreach ($services as $service) {
@@ -114,6 +126,12 @@ class Service extends Model implements HasMedia
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
 
+            // delete blopost index cache key
+            $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
             //delete all services cache keys
             $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
             foreach ($services as $service) {
@@ -122,6 +140,12 @@ class Service extends Model implements HasMedia
                 \Illuminate\Support\Facades\Cache::forget($cacheKey);
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
+
+            // delete service index cache key
+            $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.service.index'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
 
 
             // delete homepage cache key
@@ -143,6 +167,12 @@ class Service extends Model implements HasMedia
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
 
+            // delete blopost index cache key
+            $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+
             //delete all services cache keys
             $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
             foreach ($services as $service) {
@@ -151,6 +181,12 @@ class Service extends Model implements HasMedia
                 \Illuminate\Support\Facades\Cache::forget($cacheKey);
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
+
+            // delete service index cache key
+            $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
+            \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.service.index'));
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
 
 
             // delete homepage cache key
