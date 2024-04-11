@@ -88,13 +88,13 @@ class Service extends Model implements HasMedia
             $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+           
 
             // delete service index cache key
             $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.service.index'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+        
 
             //delete all services cache keys
             $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
@@ -110,7 +110,7 @@ class Service extends Model implements HasMedia
             $cacheKeyHomepage = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.homepage'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyHomepage);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.homepage'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+       
 
             // delete more cache keys service
             (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
@@ -130,7 +130,7 @@ class Service extends Model implements HasMedia
             $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+          
 
             //delete all services cache keys
             $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
@@ -145,14 +145,14 @@ class Service extends Model implements HasMedia
             $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.service.index'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+          
 
 
             // delete homepage cache key
             $cacheKeyHomepage = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.homepage'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyHomepage);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.homepage'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+         
 
             // delete more cache keys service
             (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
@@ -171,7 +171,7 @@ class Service extends Model implements HasMedia
             $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+     
 
             //delete all services cache keys
             $services = \GrassFeria\StarterkidService\Models\Service::frontGetServicesWhereStatusIsOnline()->get();
@@ -186,14 +186,14 @@ class Service extends Model implements HasMedia
             $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.service.index'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+          
 
 
             // delete homepage cache key
             $cacheKeyHomepage = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.homepage'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyHomepage);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.homepage'));
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheFromAllPagesJob::dispatch();
+     
 
             // delete more cache keys service
             (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
