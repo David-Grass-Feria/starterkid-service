@@ -73,9 +73,17 @@ class Service extends Model implements HasMedia
     {
         parent::boot();
 
+        // stop if cache is false
+        if(config('starterkid-frontend.frontend_cache') == false){
+            return;
+        }
+        
         static::created(function () {
-
-            //delete all blogpost cache keys
+            
+           
+            
+             
+                //delete all blogpost cache keys
             $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
             foreach ($blogposts as $blogpost) {
                 $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
@@ -114,7 +122,15 @@ class Service extends Model implements HasMedia
 
             // delete more cache keys service
             (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
+        
+            
         });
+
+    
+        // stop if cache is false
+        if(config('starterkid-frontend.frontend_cache') == false){
+            return;
+        }
 
         static::updated(function ($model) {
             //delete all blogpost cache keys
@@ -157,7 +173,15 @@ class Service extends Model implements HasMedia
             // delete more cache keys service
             (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
         });
+        
+        // stop if cache is false
+        if(config('starterkid-frontend.frontend_cache') == false){
+            return;
+        }
+        
         static::deleted(function ($model) {
+           
+            
             //delete all blogpost cache keys
             $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
             foreach ($blogposts as $blogpost) {
@@ -197,6 +221,8 @@ class Service extends Model implements HasMedia
 
             // delete more cache keys service
             (new \App\Services\DeleteCacheKeysAfterServiceUpdate())->deleteCacheKeys();
+
+        
         });
     }
 
