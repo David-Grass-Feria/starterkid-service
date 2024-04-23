@@ -1,5 +1,5 @@
 <x-slot:title>{{config('starterkid-service.service_title')}}</x-slot>
-<x-slot:robots>noindex, follow</x-slot>
+<x-slot:robots>index, follow</x-slot>
 
 <div>
     @include('starterkid-frontend::header')

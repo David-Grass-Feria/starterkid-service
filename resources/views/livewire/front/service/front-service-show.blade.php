@@ -1,5 +1,5 @@
 <x-slot:title>{{$service->name}}</x-slot>
-<x-slot:robots>noindex, follow</x-slot>
+<x-slot:robots>index, follow</x-slot>
 
 
 <div>
