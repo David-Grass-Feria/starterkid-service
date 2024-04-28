@@ -1,6 +1,6 @@
 <x-slot:title>{{$service->title}}</x-slot>
 <x-slot:robots>index, follow</x-slot>
-
+<x-slot:description>{{ strip_tags($service->preview) ?? '' }}</x-slot>
 
 <div>
     @include('starterkid-frontend::header')
