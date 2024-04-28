@@ -24,13 +24,13 @@
 
     
     @include('starterkid-frontend::footer',['services' => $services])
-</div>
-
-
-@section('meta')
+    @section('meta')
 <meta property="og:title" content="{{$service->name}}" />
 <meta property="og:description" content="{{ strip_tags($service->preview) ?? '' }}" />
 <meta property="og:image" content="{{$service->getFirstMediaUrl('ckimages','large') ?? ''}}" />
 <meta property="og:url" content="{{url()->current()}}" />
 <meta property="og:type" content="website" />
 @endsection
+</div>
+
+
