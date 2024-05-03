@@ -46,7 +46,7 @@ class ServiceCreate extends Component
 
         $validated = $this->validate([
             'name'                      => 'required|string',
-            'slug'                      => 'required|string',
+            'slug'                      => 'required|string|unique:services',
             'title'                     => 'required|string',
             'content'                   => 'required|string',
             'preview'                   => 'nullable|string',

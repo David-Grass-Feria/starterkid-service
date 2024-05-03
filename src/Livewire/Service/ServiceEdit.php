@@ -4,6 +4,7 @@ namespace GrassFeria\StarterkidService\Livewire\Service;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Validation\Rule;
 
 
 class ServiceEdit extends Component
@@ -51,7 +52,7 @@ class ServiceEdit extends Component
         $validated = $this->validate([
             'name'                      => 'required|string',
             'title'                     => 'required|string',
-            'slug'                      => 'required|string',
+            'slug'                      => ['required', 'string', Rule::unique('services')->ignore($this->service->id)],
             'content'                   => 'required|string',
             'preview'                   => 'nullable|string',
             'created_at'                 => 'required|date_format:' . config('starterkid.time_format.date_time_format_for_picker'),
