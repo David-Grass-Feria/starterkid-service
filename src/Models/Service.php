@@ -96,8 +96,8 @@ class Service extends Model implements HasMedia
             $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
             \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
-           
 
+            
             // delete service index cache key
             $cacheKeyServiceIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.service.index'));
             \Illuminate\Support\Facades\Cache::forget($cacheKeyServiceIndex);
