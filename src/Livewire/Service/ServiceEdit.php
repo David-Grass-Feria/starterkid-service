@@ -17,7 +17,6 @@ class ServiceEdit extends Component
     public $content;
     public $created_at;
     public $status;
-    public $slug;
     public $preview;
     
     
@@ -35,7 +34,7 @@ class ServiceEdit extends Component
         $this->preview                          = $this->service->preview;
         $this->created_at                       = $this->service->created_at->format(config('starterkid.time_format.date_time_format_for_picker'));
         $this->status                           = $this->service->status;
-        $this->slug                             = $this->service->slug;
+        
       
         $this->authorize('update',[\GrassFeria\StarterkidService\Models\Service::class,$this->service]);
         //$this->date                                 = $this->service->date->format(config('starterkid.time_format.date_format_for_picker'));
@@ -52,7 +51,6 @@ class ServiceEdit extends Component
         $validated = $this->validate([
             'name'                      => 'required|string',
             'title'                     => 'required|string',
-            'slug'                      => ['required', 'string', Rule::unique('services')->ignore($this->service->id)],
             'content'                   => 'required|string',
             'preview'                   => 'nullable|string',
             'created_at'                 => 'required|date_format:' . config('starterkid.time_format.date_time_format_for_picker'),
