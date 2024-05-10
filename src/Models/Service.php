@@ -4,6 +4,7 @@ namespace GrassFeria\StarterkidService\Models;
 
 use App\Models\User;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -84,6 +85,7 @@ class Service extends Model implements HasMedia
             
              
                 //delete all blogpost cache keys
+                if(Route::has('front.blog-post.index')){
             $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
             foreach ($blogposts as $blogpost) {
                 $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
@@ -91,11 +93,20 @@ class Service extends Model implements HasMedia
                 \Illuminate\Support\Facades\Cache::forget($cacheKey);
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
+        }
 
-            // delete blopost index cache key
-            $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
-            \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
+            //delete all wiki cache keys
+           if(Route::has('front.wiki.index')){
+            $wikis = \GrassFeria\StarterkidWiki\Models\Wiki::frontGetWikiWhereStatusIsOnline()->get();
+            foreach ($wikis as $wiki) {
+            $url = route('front.wiki.show', ['slug' => $wiki->slug]);
+            $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+            \Illuminate\Support\Facades\Cache::forget($cacheKey);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+              }      
+        }
+
+           
 
             
             // delete service index cache key
@@ -134,6 +145,7 @@ class Service extends Model implements HasMedia
 
         static::updated(function ($model) {
             //delete all blogpost cache keys
+            if(Route::has('front.blog-post.index')){
             $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
             foreach ($blogposts as $blogpost) {
                 $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
@@ -141,11 +153,18 @@ class Service extends Model implements HasMedia
                 \Illuminate\Support\Facades\Cache::forget($cacheKey);
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
+        }
 
-            // delete blopost index cache key
-            $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
-            \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
+           //delete all wiki cache keys
+           if(Route::has('front.wiki.index')){
+            $wikis = \GrassFeria\StarterkidWiki\Models\Wiki::frontGetWikiWhereStatusIsOnline()->get();
+            foreach ($wikis as $wiki) {
+            $url = route('front.wiki.show', ['slug' => $wiki->slug]);
+            $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+            \Illuminate\Support\Facades\Cache::forget($cacheKey);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+              }      
+        }
           
 
             //delete all services cache keys
@@ -183,6 +202,7 @@ class Service extends Model implements HasMedia
            
             
             //delete all blogpost cache keys
+            if(Route::has('front.blog-post.index')){
             $blogposts = \GrassFeria\StarterkidBlog\Models\BlogPost::frontGetBlogPostWhereStatusIsOnline()->get();
             foreach ($blogposts as $blogpost) {
                 $url = route('front.blog-post.show', ['slug' => $blogpost->slug]);
@@ -190,11 +210,18 @@ class Service extends Model implements HasMedia
                 \Illuminate\Support\Facades\Cache::forget($cacheKey);
                 \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
             }
+        }
 
-            // delete blopost index cache key
-            $cacheKeyBlogIndex = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl(route('front.blog-post.index'));
-            \Illuminate\Support\Facades\Cache::forget($cacheKeyBlogIndex);
-            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch(route('front.blog-post.index'));
+             //delete all wiki cache keys
+           if(Route::has('front.wiki.index')){
+            $wikis = \GrassFeria\StarterkidWiki\Models\Wiki::frontGetWikiWhereStatusIsOnline()->get();
+            foreach ($wikis as $wiki) {
+            $url = route('front.wiki.show', ['slug' => $wiki->slug]);
+            $cacheKey = \GrassFeria\StarterkidFrontend\Services\GetCacheKey::ForUrl($url);
+            \Illuminate\Support\Facades\Cache::forget($cacheKey);
+            \GrassFeria\StarterkidFrontend\Jobs\PreloadCacheJob::dispatch($url);
+              }      
+        }
      
 
             //delete all services cache keys
