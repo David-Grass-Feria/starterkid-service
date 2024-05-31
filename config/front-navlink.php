@@ -7,6 +7,7 @@ return [
         'route' => 'front.service.index',
         'active' => ['front.service.index','front.service.show'],
         'order' => env('SERIVCE_ORDER_FOR_NAV',2),
+        'on_header' => env('SERVICE_LINK_ON_HEADER',true),
         
         
     ],
